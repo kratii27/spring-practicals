@@ -12,17 +12,18 @@ public class TestPerson {
 
 
 //		Person p = (Person) factory.getBean("person");
+		
 		Person p = factory.getBean("person", Person.class);
 
 		System.out.println(p.getName());
 		System.out.println(p.getAddress());
 
-		System.out.println("<------------------------>");
+//		System.out.println("<------------------------>");
 		
-		Person p1 = factory.getBean("person1", Person.class);
-
-		System.out.println(p1.getName());
-		System.out.println(p1.getAddress());
+//		Person p1 = factory.getBean("person1", Person.class);
+//
+//		System.out.println(p1.getName());
+//		System.out.println(p1.getAddress());
 	}
 
 }
