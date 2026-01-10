@@ -18,4 +18,4 @@
 		<property name="inventory" ref="inventory"></property>
 	</bean>
 
-</beans>
+</beans>R
