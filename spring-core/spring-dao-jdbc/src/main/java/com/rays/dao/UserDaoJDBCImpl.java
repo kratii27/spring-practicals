@@ -21,6 +21,17 @@ public class UserDaoJDBCImpl implements UserDAOint {
 	public void setDatasource(DataSource datasource) {
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}
+	
+	public long nextPk() {
+		
+		String sql = "select max(id) from st_user";
+		Long maxId = jdbcTemplate.queryForObject(sql, Long.class);
+		if (maxId == null) {
+			return 1;
+		}
+		return maxId + 1;
+		
+	}
 
 	public void add(UserDTO dto) {
 
