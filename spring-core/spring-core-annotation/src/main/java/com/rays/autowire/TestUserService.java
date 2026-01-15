@@ -13,8 +13,8 @@ public class TestUserService {
 		
 //		UserServiceByType userService = context.getBean(UserServiceByType.class);
 //		UserServiceByName userService = context.getBean(UserServiceByName.class);
-//		UserServiceByConstructor userService = context.getBean(UserServiceByConstructor.class);
-		UserServiceBySetter userService = context.getBean(UserServiceBySetter.class);
+		UserServiceByConstructor userService = context.getBean(UserServiceByConstructor.class);
+//		UserServiceBySetter userService = context.getBean(UserServiceBySetter.class);
 
 		userService.testAdd();
 	}
