@@ -23,14 +23,29 @@ public class TestUserService {
 
 		TestUserService test = (TestUserService) context.getBean("testUserService");
 
-		test.testAdd();
+//		test.testAdd();
 //		test.testDelete();
 //		test.testUpdate();
 //		test.testSearch();
 //		test.testFindByPk();
 //		test.testFindByLogin();
-//		test.testAutheticate();
+		test.testAutheticate();
 
+	}
+
+
+
+	private void testFindByLogin() {
+		UserDTO dto = new UserDTO();
+		dto = service.findByLogin("krati@gmail.com");
+		if (dto != null) {
+			System.out.println(dto.getId());
+			System.out.println(dto.getFirstName());
+			System.out.println(dto.getLastName());
+			System.out.println(dto.getLogin());
+			System.out.println(dto.getPassword());
+		}
+		
 	}
 
 
@@ -39,7 +54,7 @@ public class TestUserService {
 		UserDTO dto = new UserDTO();
 		dto.setFirstName("arya");
 		dto.setLastName("Trivedi");
-		dto.setLogin("ariii@gmail.com");
+		dto.setLogin("arii@gmail.com");
 		dto.setPassword("pass@1234");
 		service.add(dto);
 		System.out.println("data inserted successfully");
@@ -77,5 +92,41 @@ public class TestUserService {
 	private void testDelete() {
 		service.delete(3);
 		System.out.println("data deleted successfully");
+	}
+	
+	private void testSearch() {
+		UserDTO dto = new UserDTO();
+//		dto.setFirstName("a");
+		int pageNo = 1;
+		int pageSize = 5;
+		List<UserDTO> list = service.search(dto, pageNo, pageSize);
+
+		Iterator<UserDTO> it = list.iterator();
+		while (it.hasNext()) {
+			dto = it.next();
+			System.out.println(dto.getId());
+			System.out.println(dto.getFirstName());
+			System.out.println(dto.getLastName());
+			System.out.println(dto.getLogin());
+			System.out.println(dto.getPassword());
+		}
+	}
+	
+	private void testAutheticate() {
+		UserDTO dto = service.authenticate("krati@gmail.com", "pass@1234");
+		
+		if (dto != null) {
+			System.out.println("login successful");
+			
+			System.out.print(dto.getId());
+			System.out.print("\t" + dto.getFirstName());
+			System.out.print("\t" + dto.getLastName());
+			System.out.print("\t" + dto.getLogin());
+			System.out.println("\t" + dto.getPassword());
+			
+		} else {
+			System.out.println("invalid login id password");
+		}
+		
 	}
 }

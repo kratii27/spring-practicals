@@ -18,11 +18,22 @@ public class UserServiceImpl implements UserServiceInt {
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public long add(UserDTO dto) {
-		return dao.add(dto);
+		
+		UserDTO existDto = findByLogin(dto.getLogin());
+		if (existDto != null) {
+			throw new RuntimeException("login id already exists");
+		}
+		long pk = dao.add(dto);
+		return pk;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void update(UserDTO dto) {
+
+		UserDTO existDto = findByLogin(dto.getLogin());
+		if (existDto != null && existDto.getId() != dto.getId()) {
+			throw new RuntimeException("duPLIcatE recorD");
+		}
 		dao.update(dto);
 	}
 
@@ -31,14 +42,14 @@ public class UserServiceImpl implements UserServiceInt {
 		dao.delete(id);
 	}
 
-	public List search(UserDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public List search() {
+		return dao.search();
 	}
 
+	@Transactional(readOnly = true)
 	public List search(UserDTO dto, int pageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.search(dto, pageNo, pageSize);
 	}
 
 	@Transactional(readOnly = true)
@@ -48,13 +59,12 @@ public class UserServiceImpl implements UserServiceInt {
 
 	@Transactional(readOnly = true)
 	public UserDTO findByLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.findByLogin(login);
 	}
 
+	@Transactional(readOnly = true)
 	public UserDTO authenticate(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.authenticate(login, password);
 	}
 
 }

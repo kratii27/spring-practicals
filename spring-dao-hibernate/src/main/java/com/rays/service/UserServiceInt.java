@@ -12,7 +12,7 @@ public interface UserServiceInt {
 	
 	public void update(UserDTO dto);
 	
-	public List search(UserDTO dto);
+	public List search();
 	
 	public List search(UserDTO dto,int pageNo, int pageSize);
 	
